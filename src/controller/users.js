@@ -34,3 +34,13 @@ exports.deleteUser = async (req, res, next) => {
     const user = await usersModel.findByPk(userId);
     await user.destroy();
     res.status(200).json({
+        ok:true, message:"user is deleted",
+        deletedId: userId,
+    })
+    }catch(e){
+        res.status(500).json({
+            ok:true, message: e.message,
+        })
+    }
+}
+
