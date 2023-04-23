@@ -35,6 +35,7 @@ const joiUserValidator = joi.object({
 
 
 usersModel.afterCreate(user => {
+    console.log(user)
     const { error } = joiUserValidator(user);
     if (error) throw Error(error)
 })
