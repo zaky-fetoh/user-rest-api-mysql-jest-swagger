@@ -1,6 +1,6 @@
 const { usersModel } = require("../model/users")
 
-const NUMBER_PER_PAGE = number(process.env.NUMBER_PER_PAGE)
+const NUMBER_PER_PAGE = Number(process.env.NUMBER_PER_PAGE)
 
 
 exports.addUser = async (req, res, next) => {
@@ -84,12 +84,23 @@ exports.getUser = async (req, res, next) => {
      * input: quary i.e.) ?page=2&limit=3
      * Method: GET
      */
-    const query = {};
-    const page = req.query.page ? req.query.page : 1;
-    for (let e in ["id", "name", "phone", "email"])
-        if (req.query[e]) query[e] = req.query[e];
-    const fetchedData = usersModel.findAll({
-        where: query, offset: page * NUMBER_PER_PAGE,
-        limit: NUMBER_PER_PAGE,
-    })
+    try {
+        const query = {};
+        const page = req.query.page ? Number(req.query.page) : 1;
+        for (let e of  ["id", "name", "phone", "email"])
+            if (req.query[e]) query[e] = req.query[e];
+        console.log(query)
+        const fetchedData = await usersModel.findAll({
+            where: query, offset: page * NUMBER_PER_PAGE,
+            limit: NUMBER_PER_PAGE,
+        });
+        res.status(200).json({
+            ok:true, message:"success fetched", 
+            data: fetchedData,
+        })
+    }catch(e){
+        res.status(500).json({
+            ok:false, message:e.message,
+        })
+    }
 }

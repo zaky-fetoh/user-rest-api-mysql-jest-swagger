@@ -11,6 +11,7 @@ const userCont = require("./controller/users");
         .post("/user",userCont.addUser)
         .put("/user/:userId", userCont.editUser)
         .delete("/user/:userId", userCont.deleteUser)
+        .get("/user",userCont.getUser)
         .listen(3000, ()=>{
             console.log("SERVER Startlisting")
         })
