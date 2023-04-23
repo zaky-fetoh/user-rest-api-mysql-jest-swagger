@@ -10,6 +10,7 @@ const userCont = require("./controller/users");
     express().use(express.json()).use(morgan())
         .post("/user",userCont.addUser)
         .put("/user/:userId", userCont.editUser)
+        .delete("/user/:userId", userCont.deleteUser)
         .listen(3000, ()=>{
             console.log("SERVER Startlisting")
         })

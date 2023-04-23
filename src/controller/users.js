@@ -1,5 +1,7 @@
 const { usersModel } = require("../model/users")
 
+const NUMBER_PER_PAGE = number(process.env.NUMBER_PER_PAGE)
+
 
 exports.addUser = async (req, res, next) => {
     /***
@@ -30,44 +32,64 @@ exports.deleteUser = async (req, res, next) => {
      * method: DELETE
      * input: params userId
      */
-    try{const userId = req.params.userId; 
-    const user = await usersModel.findByPk(userId);
-    await user.destroy();
-    res.status(200).json({
-        ok:true, message:"user is deleted",
-        deletedId: userId,
-    })
-    }catch(e){
+    try {
+        const userId = req.params.userId;
+        const user = await usersModel.findByPk(userId);
+        if (!user) throw Error("user does not Exist")
+        await user.destroy();
+        res.status(200).json({
+            ok: true, message: "user is deleted",
+            deletedId: userId,
+        })
+    } catch (e) {
         res.status(500).json({
-            ok:true, message: e.message,
+            ok: false, message: e.message,
         })
     }
 }
 
 
-exports.editUser = async(req, res, next)=>{ 
+exports.editUser = async (req, res, next) => {
     /***
      * url: /user/:userId
      * method: put
      * input: params userId and
      * PUT payload which is Json object of UserSchema
      */
-     try{const userId = req.params.userId; 
-        const inputUser = req.body; 
+    try {
+        const userId = req.params.userId;
+        const inputUser = req.body;
         let user = await usersModel.findByPk(userId);
-        inputUser.id= user.id; 
-        for(let a in user.dataValues) user[a] = inputUser[a]
+        inputUser.id = user.id;
+        for (let a in user.dataValues) user[a] = inputUser[a]
         await user.save();
         res.status(200).json({
-            ok:true, message:"user is updated",
-            data:{
+            ok: true, message: "user is updated",
+            data: {
                 ...user.dataValues,
             }
         })
-        }catch(e){
-            res.status(500).json({
-                ok:true, message: e.message,
-            })
-        }
+    } catch (e) {
+        res.status(500).json({
+            ok: true, message: e.message,
+        })
+    }
 }
 
+
+
+exports.getUser = async (req, res, next) => {
+    /***
+     * URl: /user 
+     * input: quary i.e.) ?page=2&limit=3
+     * Method: GET
+     */
+    const query = {};
+    const page = req.query.page ? req.query.page : 1;
+    for (let e in ["id", "name", "phone", "email"])
+        if (req.query[e]) query[e] = req.query[e];
+    const fetchedData = usersModel.findAll({
+        where: query, offset: page * NUMBER_PER_PAGE,
+        limit: NUMBER_PER_PAGE,
+    })
+}
