@@ -28,7 +28,7 @@ exports.deleteUser = async (req, res, next) => {
     /***
      * url: /user/:userId
      * method: DELETE
-     * input: params user Id
+     * input: params userId
      */
     try{const userId = req.params.userId; 
     const user = await usersModel.findByPk(userId);
@@ -42,5 +42,32 @@ exports.deleteUser = async (req, res, next) => {
             ok:true, message: e.message,
         })
     }
+}
+
+
+exports.editUser = async(req, res, next)=>{ 
+    /***
+     * url: /user/:userId
+     * method: put
+     * input: params userId and
+     * PUT payload which is Json object of UserSchema
+     */
+     try{const userId = req.params.userId; 
+        const inputUser = req.body; 
+        let user = await usersModel.findByPk(userId);
+        inputUser.id= user.id; 
+        for(let a in user.dataValues) user[a] = inputUser[a]
+        await user.save();
+        res.status(200).json({
+            ok:true, message:"user is updated",
+            data:{
+                ...user.dataValues,
+            }
+        })
+        }catch(e){
+            res.status(500).json({
+                ok:true, message: e.message,
+            })
+        }
 }
 

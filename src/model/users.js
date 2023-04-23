@@ -14,7 +14,6 @@ const usersModel = database.define(USER_TABLE_NAME, {
     },
     name: {
         type: sequelize.DataTypes.STRING(25),
-        allowNull: false,
     },
     phone: {
         type: sequelize.DataTypes.STRING(20),
@@ -30,13 +29,18 @@ const joiUserValidator = joi.object({
     name: joi.string().min(4).max(15).required(),
     email: joi.string().email().required(),
     phone: joi.string().length(12),
+    updatedAt:joi.any(),
+    createdAt:joi.any(),
 })
 
 
 
-usersModel.afterCreate(user => {
+usersModel.beforeCreate(user => {
+    console.log(` Usr is ${JSON.stringify(user)}`)
     console.log(user)
-    const { error } = joiUserValidator(user);
+    console.log(` Usr is ${JSON.stringify(user)}`)
+
+    const { error } = joiUserValidator.validate(user.dataValues);
     if (error) throw Error(error)
 })
 
