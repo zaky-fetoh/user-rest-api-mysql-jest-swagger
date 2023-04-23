@@ -87,7 +87,7 @@ exports.getUser = async (req, res, next) => {
     try {
         const query = {};
         const page = req.query.page ? Number(req.query.page) : 1;
-        for (let e of  ["id", "name", "phone", "email"])
+        for (let e of ["id", "name", "phone", "email"])
             if (req.query[e]) query[e] = req.query[e];
         console.log(query)
         const fetchedData = await usersModel.findAll({
@@ -95,12 +95,12 @@ exports.getUser = async (req, res, next) => {
             limit: NUMBER_PER_PAGE,
         });
         res.status(200).json({
-            ok:true, message:"success fetched", 
+            ok: true, message: "success fetched",
             data: fetchedData,
         })
-    }catch(e){
+    } catch (e) {
         res.status(500).json({
-            ok:false, message:e.message,
+            ok: false, message: e.message,
         })
     }
 }

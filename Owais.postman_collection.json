@@ -1,0 +1,279 @@
+{
+	"info": {
+		"_postman_id": "8f31c475-b81b-41f9-8892-4b473c6ec4ed",
+		"name": "Owais",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "addUser",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": [
+				{
+					"name": "addUser",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"mahMoud\",\n    \"phone\": \"012345678910\",\n    \"email\": \"mag@gmail33.com\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/user",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "55"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"37-rfnLlO/2vGs2PZ8YE43Z0qzqfwc\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 23 Apr 2023 13:35:52 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"ok\": true,\n    \"message\": \"user added\",\n    \"data\": {\n        \"userId\": 14\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "UpdateUser",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": [
+				{
+					"name": "UpdateUser",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"mahMoud\",\n    \"phone\": \"012345678910\",\n    \"email\": \"mag@gmailupdated.com\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/user/14",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"14"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "205"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"cd-26uKvQcKg6U71lWTfBgqZzBE+w0\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 23 Apr 2023 13:37:06 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"ok\": true,\n    \"message\": \"user is updated\",\n    \"data\": {\n        \"id\": 14,\n        \"name\": \"mahMoud\",\n        \"phone\": \"012345678910\",\n        \"email\": \"mag@gmailupdated.com\",\n        \"createdAt\": \"2023-04-23T13:35:52.000Z\",\n        \"updatedAt\": \"2023-04-23T13:37:06.745Z\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "deleteUser",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": [
+				{
+					"name": "deleteUser",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/user/15",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"15"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "56"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"38-9gxwj1iAL1Eku0MdfApQ3NhiX6w\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 23 Apr 2023 15:48:01 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"ok\": true,\n    \"message\": \"user is deleted\",\n    \"deletedId\": \"15\"\n}"
+				}
+			]
+		},
+		{
+			"name": "getUser",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": [
+				{
+					"name": "getUser",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/user?page=1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "818"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"332-OQTLIJJiNutnZu9cOWYNt3nKcaE\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 23 Apr 2023 16:11:38 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"ok\": true,\n    \"message\": \"success fetched\",\n    \"data\": [\n        {\n            \"id\": 20,\n            \"name\": \"mahMoud\",\n            \"phone\": \"012345678910\",\n            \"email\": \"mag@gmail33.com\",\n            \"createdAt\": \"2023-04-23T15:47:18.000Z\",\n            \"updatedAt\": \"2023-04-23T15:47:18.000Z\"\n        },\n        {\n            \"id\": 21,\n            \"name\": \"mahMoud\",\n            \"phone\": \"012345678910\",\n            \"email\": \"mag@gmail33.com\",\n            \"createdAt\": \"2023-04-23T15:47:19.000Z\",\n            \"updatedAt\": \"2023-04-23T15:47:19.000Z\"\n        },\n        {\n            \"id\": 22,\n            \"name\": \"mahMoud\",\n            \"phone\": \"012345678910\",\n            \"email\": \"mag@gmail33.com\",\n            \"createdAt\": \"2023-04-23T15:47:20.000Z\",\n            \"updatedAt\": \"2023-04-23T15:47:20.000Z\"\n        },\n        {\n            \"id\": 23,\n            \"name\": \"mahMoud\",\n            \"phone\": \"012345678910\",\n            \"email\": \"mag@gmail33.com\",\n            \"createdAt\": \"2023-04-23T15:47:21.000Z\",\n            \"updatedAt\": \"2023-04-23T15:47:21.000Z\"\n        },\n        {\n            \"id\": 24,\n            \"name\": \"mahMoud\",\n            \"phone\": \"012345678910\",\n            \"email\": \"mag@gmail33.com\",\n            \"createdAt\": \"2023-04-23T15:47:21.000Z\",\n            \"updatedAt\": \"2023-04-23T15:47:21.000Z\"\n        }\n    ]\n}"
+				}
+			]
+		}
+	]
+}
