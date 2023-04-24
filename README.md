@@ -16,7 +16,7 @@ This is an example of how to list things you need to use the software and how to
    ```sh
    git@github.com:zaky-fetoh/user-rest-api-mysql-jest-swagger.git
    ```
-2. Install NPM packages
+2. Install containers
    ```sh
    sudo docker compose up
    ```
