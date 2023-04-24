@@ -1,0 +1,213 @@
+openapi: '3.0.2'
+info:
+  title: user API
+  version: '1.0'
+servers:
+  - url: https://localhost:80
+tags:
+  - name: User
+    description: user apis
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The auto-generated ID
+        name:
+          type: string
+          description: User name
+        phone:
+          type: string
+          description: the user phone
+        email:
+          type: string
+          description: the User Name
+      required:
+        - name
+        - email
+      example:
+        id: 12
+        name: Zaky
+        phone: 01234578910
+        email: zaky@gmail.com
+    FailedRes:
+      type: object
+      properties:
+        ok:
+          type: boolean
+          description: failed flag (false)
+        message:
+          type: string
+          description: the Error message included of the exception
+      example:
+        ok: false
+        message: User Does not Exist
+
+paths:
+  /user:
+    get:
+      summary: Returns the list of all User that conferm search Params
+      tags: [User]
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: string
+          required: false
+          description: The user id
+        - in: query
+          name: page
+          schema:
+            type: number
+          required: false
+          description: The page number for pagination
+      responses:
+        200:
+          description: The list of User that conferm search Params
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok: 
+                    type: boolean
+                    description: The Success Flag true
+                  message: 
+                    type: string
+                    description: Helping message
+                  data: 
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+        500:
+          description: Faild Request due to thrown exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FailedRes'
+    post:
+      summary: Adding record to the the table
+      tags: [User]
+      parameters:
+        - in: body
+          name: user
+          required: true
+          description: User to be added to the DB
+          schema:
+            $ref: '#/components/schemas/User'
+      responses:
+          200:
+            description: User is added correctly
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    ok: 
+                      type: boolean
+                      description: The Success Flag true
+                    message: 
+                      type: string
+                      description: Helping message
+                    data: 
+                      type: object
+                      properties:
+                        userId:
+                          type: string
+                          description: Id of the Added User
+          500:
+            description: failed to add this user
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/FailedRes'
+  /user/{userId}:
+    put:
+      summary: Editing User Given Id
+      tags:
+        - User
+      parameters:
+        - in: body
+          description: Updated Data of the User
+          name: updatedUser
+          required: true
+          schema:
+            $ref: '#/components/schemas/User'
+        - in: path
+          description: Id of the User to Be updated
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: User updated Successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    description: success flag (true)
+                  message: 
+                    type: string
+                    description: Helping message
+                  data:
+                    $ref: '#/components/schemas/User'
+        500:
+          description: failed to edit this user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FailedRes'
+    delete:
+      summary: deletes User of given Id
+      tags:
+        - User
+      parameters:
+        - in: path
+          description: Id of the User to Be deleted
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: User deleted Successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    description: success flag (true)
+                  message: 
+                    type: string
+                    description: Helping message
+                  deletedId:
+                    type: string
+                    description: deleted UserId
+        500:
+          description: failed to edit this user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FailedRes'
+
+
+
+
+
+
+
+
+
+
+              
+
+

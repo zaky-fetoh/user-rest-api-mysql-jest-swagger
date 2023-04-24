@@ -22,7 +22,8 @@
     "sequelize": "^6.31.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^4.6.2",
-    "wait-port": "^1.0.4"
+    "wait-port": "^1.0.4",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "jest": "^29.5.0",

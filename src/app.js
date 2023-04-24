@@ -10,6 +10,7 @@ const cors = require('cors');
 const database = require("./utils/database");
 const userRoutes = require("./routes/users");
 const monitor = require("./utils/metrics");
+const docs = require("./utils/swagger"); 
 
 
 const cred = {
@@ -26,6 +27,7 @@ const cred = {
 
     const app = express().use(cors())
     .use(monitor.monitorResponseTime)
+    .use("/docs", docs)
     .use(express.json()).use(morgan())
     .use("/user", userRoutes)
 

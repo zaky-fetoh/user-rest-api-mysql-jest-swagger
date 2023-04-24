@@ -1,27 +1,9 @@
 const swaggerUI = require("swagger-ui-express");
-const swaggerJsDoc = require("swagger-jsdoc");
 const express = require("express")
+const ymljs = require("yamljs")
 
-const options = {
-    definition: {
-        openapi: "3.0.0",
-        info: {
-            title: "User API",
-            version: "1.0.0",
-            description: "A simple User API",
-        },
-        servers: [
-            {
-                url: "http://localhost:3000",
-            },
-        ],
-    },
-    apis: ["../routes/*.js"],
-};
-
+const options = ymljs.load("./src/docs.yml")
 
 module.exports = express.Router()
-    .use("/api-docs", swaggerUI.serve, swaggerUI.setup(
-        swaggerJsDoc(options)
-    ));
+    .use(swaggerUI.serve, swaggerUI.setup(options));
 
