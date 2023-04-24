@@ -82,7 +82,7 @@ exports.editUser = async (req, res, next) => {
 exports.getUser = async (req, res, next) => {
     /***
      * URl: /user 
-     * input: quary i.e.) ?page=2&limit=3
+     * input: quary i.e.) ?page=2
      * Method: GET
      */
     try {
@@ -90,7 +90,6 @@ exports.getUser = async (req, res, next) => {
         const page = req.query.page ? Number(req.query.page) : 1;
         for (let e of ["id", "name", "phone", "email"])
             if (req.query[e]) query[e] = req.query[e];
-        console.log(query)
         const fetchedData = await usersModel.findAll({
             where: query, offset: page * NUMBER_PER_PAGE,
             limit: NUMBER_PER_PAGE,
