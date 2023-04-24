@@ -20,6 +20,8 @@
     "prom-client": "^14.2.0",
     "response-time": "^2.3.2",
     "sequelize": "^6.31.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^4.6.2",
     "wait-port": "^1.0.4"
   },
   "devDependencies": {
