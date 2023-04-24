@@ -70,8 +70,9 @@ exports.editUser = async (req, res, next) => {
             }
         })
     } catch (e) {
+        console.log(e.message)
         res.status(500).json({
-            ok: true, message: e.message,
+            ok: false, message: e.message,
         })
     }
 }
