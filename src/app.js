@@ -10,7 +10,8 @@ const cors = require('cors');
 const database = require("./utils/database");
 const userRoutes = require("./routes/users");
 
-const  cred = { key: fs.readFileSync("./key.pem", 'utf-8'),
+const cred = {
+    key: fs.readFileSync("./key.pem", 'utf-8'),
     cert: fs.readFileSync("./cert.pem", 'utf-8'),
 };
 
@@ -20,9 +21,12 @@ const  cred = { key: fs.readFileSync("./key.pem", 'utf-8'),
         port: 3306,
     })
     await database.sync()
-    https.createServer(cred,express().use(cors())
+
+    const app = express().use(cors())
     .use(express.json()).use(morgan())
     .use("/user", userRoutes)
+
+    https.createServer(cred,app
     ).listen(3000, () => {
         console.log("SERVER Start Listing")
     })
