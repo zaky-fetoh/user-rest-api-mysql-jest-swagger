@@ -9,6 +9,8 @@ const cors = require('cors');
 
 const database = require("./utils/database");
 const userRoutes = require("./routes/users");
+const monitor = require("./utils/metrics");
+
 
 const cred = {
     key: fs.readFileSync("./key.pem", 'utf-8'),
@@ -23,6 +25,7 @@ const cred = {
     await database.sync()
 
     const app = express().use(cors())
+    .use(monitor.monitorResponseTime)
     .use(express.json()).use(morgan())
     .use("/user", userRoutes)
 
@@ -30,4 +33,5 @@ const cred = {
     ).listen(3000, () => {
         console.log("SERVER Start Listing")
     })
+    monitor.StartMentoringServer()
 })()

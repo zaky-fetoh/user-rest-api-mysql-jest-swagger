@@ -10,6 +10,21 @@ services:
     depends_on:
       - db
 
+  prom: 
+    image: prom/prometheus
+    container_name: prom
+    volumes:
+      - ./prom-config:/etc/prometheus
+    ports:
+      -  9090:9090  
+
+  grafana:
+    image: grafana/grafana:7.1.5
+    container_name: grafana
+    ports:
+      - 3000:3000
+
+
   db:
     container_name: owais-db
     image: mysql
