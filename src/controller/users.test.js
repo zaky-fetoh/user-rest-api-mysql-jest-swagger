@@ -96,7 +96,7 @@ describe("user Controller Function test", () => {
         expect(destroyMock).toBeCalled()
     })
 
-    it("should not delete",async()=>{
+    it("should not delete",()=>{
         const searchId = "id";
         jest.doMock("../model/users", () => ({
             usersModel: {
@@ -121,7 +121,11 @@ describe("user Controller Function test", () => {
                 expect(x.message).toBe("user does not Exist")
             })
         };
-        await require("./users").deleteUser(reqMock, resMock,)
+        require("./users").deleteUser(reqMock, resMock,)
+    })
+
+    it("should edit",()=>{
+
     })
 
 })
