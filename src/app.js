@@ -31,8 +31,10 @@ const cred = {
     .use(express.json()).use(morgan())
     .use("/user", userRoutes)
 
-    https.createServer(cred,app
-    ).listen(3000, () => {
+    // https.createServer(cred,app
+    // )
+    app
+    .listen(3000, () => {
         console.log("SERVER Start Listing")
     })
     monitor.StartMentoringServer()
